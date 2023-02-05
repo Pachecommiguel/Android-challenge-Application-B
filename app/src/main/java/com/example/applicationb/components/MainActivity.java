@@ -2,6 +2,7 @@ package com.example.applicationb.components;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
@@ -11,7 +12,7 @@ import com.example.applicationb.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private final MessageBroadcastReceiver receiver = new MessageBroadcastReceiver((message) ->
+    private final BroadcastReceiver receiver = new MessageBroadcastReceiver((message) ->
             binding.message.setText(message)
     );
 
@@ -24,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onDestroy() {
         unregisterReceiver(receiver);
-        super.onStop();
+        super.onDestroy();
     }
 
     private void setReceiver() {
